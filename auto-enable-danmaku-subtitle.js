@@ -4,6 +4,7 @@
  * 功能:
  *  - 进入视频 / 番剧 / 课程页面时, 若弹幕处于关闭状态则自动打开
  *  - 自动打开 CC 字幕, 并按设置中的「字幕语言偏好」选择字幕轨道
+ *  - 检测到 UP 上传的字幕(非 AI 字幕)时不自动开启字幕, 可在设置中关闭该行为
  *  - 切换分 P / 连播下一个视频 / 页面跳转时自动重新应用
  *  - 字幕已手动开启时不干预, 尊重用户选择
  *
@@ -152,6 +153,10 @@
       )
     }
 
+    /** 判断字幕菜单语言项是否为 AI 字幕: ai- 前缀语言代码, 或带 AI 角标图标 */
+    const isAiSubtitleItem = item =>
+      (item.dataset.lan || '').startsWith('ai-') || !!item.querySelector('svg')
+
     /** 自动开启字幕: 仅在「关闭字幕」为当前状态时点击偏好语言项 */
     const applySubtitle = async () => {
       const closeSwitch = await waitFor(
@@ -175,6 +180,15 @@
       if (!closeSwitch.classList.contains('bpx-state-active')) {
         // 字幕已开启 (用户手动打开或已应用过), 不干预
         return
+      }
+      // 检测 UP 上传的字幕: 字幕菜单里存在不带 AI 角标的普通语言项
+      if (getOptions().skipWhenUploaderSubtitle !== false) {
+        const items = [...document.querySelectorAll(selectors.subtitleLanguageItems)]
+        const hasUploaderSubtitle = items.some(item => !isAiSubtitleItem(item))
+        if (hasUploaderSubtitle) {
+          showTip('检测到 UP 上传的字幕, 未自动开启字幕')
+          return
+        }
       }
       for (let attempt = 0; attempt < 3 && !disposed; attempt++) {
         const items = [...document.querySelectorAll(selectors.subtitleLanguageItems)]
@@ -314,6 +328,10 @@
       enableSubtitle: {
         defaultValue: true,
         displayName: '自动开启 CC 字幕',
+      },
+      skipWhenUploaderSubtitle: {
+        defaultValue: true,
+        displayName: 'UP 上传了字幕时不自动开启',
       },
       subtitleLanguage: {
         defaultValue: languageDropdownItems[1],
