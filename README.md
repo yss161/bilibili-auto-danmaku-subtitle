@@ -20,6 +20,7 @@
 3. 点击**添加**，通过以下任一方式安装：
    - **从 URL 添加**（推荐），粘贴：
      `https://raw.githubusercontent.com/yss161/bilibili-auto-danmaku-subtitle/main/auto-enable-danmaku-subtitle.js`
+   - 或下载 [Release 资产](https://github.com/yss161/bilibili-auto-danmaku-subtitle/releases/latest) `auto-enable-danmaku-subtitle.js`，从代码添加粘贴文件内容；
    - 或**从代码添加**：粘贴 [`auto-enable-danmaku-subtitle.js`](./auto-enable-danmaku-subtitle.js) 的全部内容；
 4. 刷新页面，进入任意视频页即可生效。
 
