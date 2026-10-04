@@ -289,7 +289,10 @@
   const component = {
     name: 'autoEnableDanmakuSubtitle',
     displayName: '自动开启弹幕与字幕',
-    author: { name: 'LDX' },
+    author: [
+      { name: '夏幻玉', link: 'https://space.bilibili.com/610504174' },
+      { name: 'yss161', link: 'https://github.com/yss161' },
+    ],
     description: '进入视频页时自动打开弹幕; 自动开启 CC 字幕并按偏好语言选择字幕轨道.',
     tags: [
       { name: 'video', displayName: '视频', color: '#2196F3', icon: 'mdi-play-circle-outline', order: 1 },

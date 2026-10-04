@@ -2,6 +2,8 @@
 
 基于 [the1812/Bilibili-Evolved](https://github.com/the1812/Bilibili-Evolved) 的用户组件（User Component）机制开发，单文件、免构建，直接安装即可使用。
 
+**作者**：[夏幻玉](https://space.bilibili.com/610504174) (Bilibili) · [yss161](https://github.com/yss161) (GitHub)
+
 ## 功能
 
 - **自动开启弹幕**：进入视频 / 番剧 / 课程页面时，如果弹幕处于关闭状态，自动帮你打开；切换分 P、连播下一个视频时也会重新应用。
